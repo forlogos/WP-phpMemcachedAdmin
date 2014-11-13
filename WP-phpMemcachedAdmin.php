@@ -11,7 +11,6 @@ class WP_phpMemcachedAdmin {
 	private static $instance = null;
 	private $plugin_path;
 	private $plugin_url;
-	
 	public static function get_instance() {
 		// If an instance hasn't been created and set to $instance create an instance and set it to $instance.
 		if ( null == self::$instance ) {
@@ -34,7 +33,7 @@ class WP_phpMemcachedAdmin {
 	}
     private function run_plugin() {
 		function wp_phpmcdadmin() {
-			echo '<iframe id="phpmcdadmin" src="'.plugin_dir_url( __FILE__ ).'phpMemcachedAdmin?ABSPATH='.ABSPATH.'&url='.plugins_url( 'get-user_can.php' , __FILE__ ).'&uid='.get_current_user_id().'" style="width:100%; overflow: auto;" frameborder="0" onload="sizeFrame();scrollToTop();">You need to use a browser that supports iframes.</iframe>
+			echo '<iframe id="phpmcdadmin" src="'.plugin_dir_url( __FILE__ ).'phpMemcachedAdmin?crrnt_sr_cn=yes_oo_hai" style="width:100%; overflow: auto;" frameborder="0" onload="sizeFrame();scrollToTop();">You need to use a browser that supports iframes.</iframe>
 			<script type="text/javascript">
 				jQuery(document).ready(function($){
 					$("iframe").load( function() {
@@ -49,31 +48,12 @@ class WP_phpMemcachedAdmin {
 					} else {
 						F.height = F.contentWindow.document.body.scrollHeight + 60; //IE6, IE7 and Chrome
 					}
-
-					//always pass the ABSPATH, needed to verify user can view this. Needed to load WP from independent file
-					if ( F.contentWindow.location.href.indexOf("ABSPATH=") < 0  ) {
+					//always pass the crrnt_sr_cn GET var, needed to verify if user can view this, no crrnt_sr_cn no viewing
+					if ( F.contentWindow.location.href.indexOf("crrnt_sr_cn=yes_oo_hai") < 0  ) {
 						if ( F.contentWindow.location.href.indexOf("?") < 0  ) {
-							F.contentWindow.location.href = F.contentWindow.location.href + "?ABSPATH='.ABSPATH.'";
+							F.contentWindow.location.href = F.contentWindow.location.href + "?crrnt_sr_cn=yes_oo_hai";
 						} else {
-							F.contentWindow.location.href = F.contentWindow.location.href + "&ABSPATH='.ABSPATH.'";
-						}
-					}
-					
-					//always pass the url, needed to verify user can view this. Will be making a call to this url
-					if ( F.contentWindow.location.href.indexOf("url=") < 0  ) {
-						if ( F.contentWindow.location.href.indexOf("?") < 0  ) {
-							F.contentWindow.location.href = F.contentWindow.location.href + "?url='.plugins_url( 'get-user_can.php' , __FILE__ ).'";
-						} else {
-							F.contentWindow.location.href = F.contentWindow.location.href + "&url='.plugins_url( 'get-user_can.php' , __FILE__ ).'";
-						}
-					}
-
-					//always pass the id, needed to verify the current user can view even this
-					if ( F.contentWindow.location.href.indexOf("uid=") < 0  ) {
-						if ( F.contentWindow.location.href.indexOf("?") < 0  ) {
-							F.contentWindow.location.href = F.contentWindow.location.href + "?uid='.get_current_user_id().'";
-						} else {
-							F.contentWindow.location.href = F.contentWindow.location.href + "&uid='.get_current_user_id().'";
+							F.contentWindow.location.href = F.contentWindow.location.href + "&crrnt_sr_cn=yes_oo_hai";
 						}
 					}
 				}
